@@ -26,4 +26,12 @@ public class CityService {
                 .sorted(Comparator.comparing(CityDTO::getName))
                 .collect(Collectors.toList());
     }
+
+    @Transactional
+    public CityDTO insert(CityDTO dto) {
+        City entity = new City();
+        entity.setName(dto.getName());
+        entity = repository.save(entity);
+        return new CityDTO(entity);
+    }
 }
